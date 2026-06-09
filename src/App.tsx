@@ -1,11 +1,10 @@
 import "./App.css";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <main>
-      <h1 className="text-4xl font-bold text-gray-900 text-center">
-        Welcome to ZuDrop
-      </h1>
+      <Dashboard />
     </main>
   );
 }

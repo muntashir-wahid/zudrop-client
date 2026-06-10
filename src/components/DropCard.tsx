@@ -18,6 +18,17 @@ export type Reservation = {
   createdAt: string;
 };
 
+const normalizeReservation = (
+  payload: Reservation | { data?: Reservation },
+): Reservation | null => {
+  const wrappedPayload = payload as { data?: Reservation };
+  if (wrappedPayload.data) {
+    return wrappedPayload.data;
+  }
+
+  return payload as Reservation;
+};
+
 const DropCard = ({ drop }: { drop: Drop }) => {
   const { username } = useUserSession();
   const [isReserving, setIsReserving] = useState(false);
@@ -40,7 +51,7 @@ const DropCard = ({ drop }: { drop: Drop }) => {
         `/drops/${drop.id}/reservations`,
         payload,
       );
-      setReservation(response.data.data);
+      setReservation(normalizeReservation(response.data));
       toast.success("Reservation successful for next 60 seconds!");
     } catch (error) {
       toast.error(

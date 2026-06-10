@@ -15,7 +15,7 @@ export type LiveDrop = {
 };
 
 export type StockEvent = {
-  action: "created" | "reserved";
+  action: "created" | "reserved" | "expired";
   drop: LiveDrop;
 };
 

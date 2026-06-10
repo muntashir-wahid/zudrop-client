@@ -68,7 +68,10 @@ const DropCard = ({ drop }: { drop: Drop }) => {
 
       {reservation ? (
         <div className="mt-4 text-green-600 font-medium">
-          <CountdownTimer expiresAt={reservation.expiresAt} />
+          <CountdownTimer
+            expiresAt={reservation.expiresAt}
+            setReservation={setReservation}
+          />
         </div>
       ) : (
         <ReserveButton

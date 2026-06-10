@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
+import type { Reservation } from "./DropCard";
 
-export default function CountdownTimer({ expiresAt }: { expiresAt: string }) {
+export default function CountdownTimer({
+  expiresAt,
+  setReservation,
+}: {
+  expiresAt: string;
+  setReservation: React.Dispatch<React.SetStateAction<Reservation | null>>;
+}) {
   const [timeLeft, setTimeLeft] = useState(() => {
     const diff = new Date(expiresAt).getTime() - Date.now();
     return Math.max(0, Math.floor(diff / 1000));
   });
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      setReservation(null);
+    }
+  }, [timeLeft, setReservation]);
 
   useEffect(() => {
     const interval = setInterval(() => {

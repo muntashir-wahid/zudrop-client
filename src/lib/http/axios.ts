@@ -12,14 +12,13 @@ class ApiError extends Error {
 }
 
 
-// Create instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_API_URL ?? import.meta.env.VITE_BASE_URL,
   timeout: 30000,
 });
 
 api.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
   (error: AxiosError) => {
     const serverMessage =
       (error.response?.data as { message?: string })?.message ??

@@ -8,6 +8,7 @@ export default function CountdownTimer({
   expiresAt: string;
   setReservation: React.Dispatch<React.SetStateAction<Reservation | null>>;
 }) {
+  console.log("Initializing CountdownTimer with expiresAt:", expiresAt);
   const [timeLeft, setTimeLeft] = useState(() => {
     const diff = new Date(expiresAt).getTime() - Date.now();
     return Math.max(0, Math.floor(diff / 1000));

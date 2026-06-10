@@ -9,8 +9,11 @@ export default function RecentBuyers({ buyers }: { buyers: Purchase[] }) {
 
       <div className="flex gap-2 mt-1 flex-wrap">
         {buyers?.map((b, i) => (
-          <span key={i} className="text-xs bg-gray-100 px-2 py-1 rounded">
-            {b.username}
+          <span
+            key={i}
+            className="text-xs bg-gray-100 px-2 py-1 rounded capitalize"
+          >
+            {b.username.split("_").join(" ")}
           </span>
         ))}
       </div>

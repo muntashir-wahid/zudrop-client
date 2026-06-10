@@ -40,9 +40,8 @@ const DropCard = ({ drop }: { drop: Drop }) => {
         `/drops/${drop.id}/reservations`,
         payload,
       );
-      setReservation(response.data);
+      setReservation(response.data.data);
       toast.success("Reservation successful for next 60 seconds!");
-      console.log("Reservation response:", response.data);
     } catch (error) {
       toast.error(
         (error as Error).message || "Reservation failed. Please try again.",
@@ -75,14 +74,12 @@ const DropCard = ({ drop }: { drop: Drop }) => {
     }
   };
 
-  console.log("Rendering DropCard for:", drop);
-
   return (
     <div className="border rounded-xl p-5 shadow-sm bg-white w-full max-w-md flex flex-col justify-around">
       <h2 className="text-xl font-semibold">{drop.name}</h2>
       <StockIndicator stock={drop.availableStock} />
 
-      <RecentBuyers buyers={drop.purchases} />
+      <RecentBuyers buyers={drop.purchases ?? []} />
 
       {reservation ? (
         <div className="mt-4 text-green-600 font-medium">

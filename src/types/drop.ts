@@ -1,3 +1,8 @@
+export type Purchase = {
+  username: string;
+  purchasedAt: string;
+};
+
 export type Drop = {
   id: string;
   name: string;
@@ -9,4 +14,5 @@ export type Drop = {
   startsAt: string;
   createdAt: string;
   updatedAt: string | null;
+  purchases: Purchase[];
 };

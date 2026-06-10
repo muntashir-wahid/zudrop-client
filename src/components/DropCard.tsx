@@ -6,18 +6,8 @@ import useUserSession from "../hooks/useUserSession";
 import { useState } from "react";
 import api from "../lib/http/axios";
 import CountdownTimer from "./CountdownTimer";
-
-/*
-{
-    "id": "cmq85a0hc0006t3rsnnfe6mat",
-    "dropId": "cmq81ug530003qrrsxl6f7ahb",
-    "userId": "cmq852m0v0001t3rstzt971mr",
-    "expiresAt": "2026-06-10T14:10:05.520Z",
-    "status": "ACTIVE",
-    "createdAt": "2026-06-10T14:09:05.520Z"
-}
-
-*/
+import PurchaseButton from "./PurchaseButton";
+import RecentBuyers from "./RecentBuyers";
 
 export type Reservation = {
   id: string;
@@ -31,6 +21,7 @@ export type Reservation = {
 const DropCard = ({ drop }: { drop: Drop }) => {
   const { username } = useUserSession();
   const [isReserving, setIsReserving] = useState(false);
+  const [isPurchasing, setIsPurchasing] = useState(false);
   const [reservation, setReservation] = useState<Reservation | null>(null);
 
   const handleReservation = async () => {
@@ -61,10 +52,37 @@ const DropCard = ({ drop }: { drop: Drop }) => {
     }
   };
 
+  const handlePurchase = async () => {
+    if (!reservation) {
+      toast.error("No active reservation found.");
+      return;
+    }
+
+    setIsPurchasing(true);
+    try {
+      await api.post("/purchases", {
+        dropId: drop.id,
+        username,
+      });
+      toast.success("Purchase successful!");
+      setReservation(null); // Clear reservation after purchase
+    } catch (error) {
+      toast.error(
+        (error as Error).message || "Purchase failed. Please try again.",
+      );
+    } finally {
+      setIsPurchasing(false);
+    }
+  };
+
+  console.log("Rendering DropCard for:", drop);
+
   return (
     <div className="border rounded-xl p-5 shadow-sm bg-white w-full max-w-md">
       <h2 className="text-xl font-semibold">{drop.name}</h2>
       <StockIndicator stock={drop.availableStock} />
+
+      <RecentBuyers buyers={drop.purchases} />
 
       {reservation ? (
         <div className="mt-4 text-green-600 font-medium">
@@ -72,6 +90,8 @@ const DropCard = ({ drop }: { drop: Drop }) => {
             expiresAt={reservation.expiresAt}
             setReservation={setReservation}
           />
+
+          <PurchaseButton onClick={handlePurchase} loading={isPurchasing} />
         </div>
       ) : (
         <ReserveButton

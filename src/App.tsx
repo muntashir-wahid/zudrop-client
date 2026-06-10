@@ -1,10 +1,9 @@
 import { Toaster } from "react-hot-toast";
-import "./App.css";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <main>
+    <main className="min-h-screen bg-[#f4f1ea] text-slate-800">
       <Dashboard />
       <Toaster />
     </main>

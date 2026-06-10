@@ -86,14 +86,28 @@ const DropCard = ({ drop }: { drop: Drop }) => {
   };
 
   return (
-    <div className="border rounded-xl p-5 shadow-sm bg-white w-full max-w-md flex flex-col justify-around">
-      <h2 className="text-xl font-semibold">{drop.name}</h2>
+    <article className="flex flex-col justify-between gap-4 rounded-[20px] border border-[#e5dfd6] bg-white p-5 shadow-[0_10px_24px_rgba(17,24,39,0.06)] transition-transform duration-150 hover:-translate-y-0.5 hover:border-[#d8d2c6] hover:shadow-[0_14px_30px_rgba(17,24,39,0.08)] sm:p-6">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-bold leading-6 tracking-tight text-slate-900">
+            {drop.name}
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-slate-500">
+            {drop.description ?? "Limited drop available for a short time."}
+          </p>
+        </div>
+
+        <span className="inline-flex shrink-0 items-center rounded-full border border-[#e5dfd6] bg-[#f8f6f1] px-3 py-1.5 text-sm font-semibold text-slate-700">
+          ${drop.price.toFixed(2)}
+        </span>
+      </div>
+
       <StockIndicator stock={drop.availableStock} />
 
       <RecentBuyers buyers={drop.purchases ?? []} />
 
       {reservation ? (
-        <div className="mt-4 text-green-600 font-medium">
+        <div>
           <CountdownTimer
             expiresAt={reservation.expiresAt}
             setReservation={setReservation}
@@ -108,7 +122,7 @@ const DropCard = ({ drop }: { drop: Drop }) => {
           isLoading={isReserving}
         />
       )}
-    </div>
+    </article>
   );
 };
 

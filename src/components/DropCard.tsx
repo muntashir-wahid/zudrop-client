@@ -6,6 +6,7 @@ import useUserSession from "../hooks/useUserSession";
 import { useState } from "react";
 import api from "../lib/http/axios";
 import CountdownTimer from "./CountdownTimer";
+import PurchaseButton from "./PurchaseButton";
 
 /*
 {
@@ -72,6 +73,8 @@ const DropCard = ({ drop }: { drop: Drop }) => {
             expiresAt={reservation.expiresAt}
             setReservation={setReservation}
           />
+
+          <PurchaseButton onClick={() => {}} loading={false} />
         </div>
       ) : (
         <ReserveButton

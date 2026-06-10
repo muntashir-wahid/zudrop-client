@@ -78,7 +78,7 @@ const DropCard = ({ drop }: { drop: Drop }) => {
   console.log("Rendering DropCard for:", drop);
 
   return (
-    <div className="border rounded-xl p-5 shadow-sm bg-white w-full max-w-md">
+    <div className="border rounded-xl p-5 shadow-sm bg-white w-full max-w-md flex flex-col justify-around">
       <h2 className="text-xl font-semibold">{drop.name}</h2>
       <StockIndicator stock={drop.availableStock} />
 

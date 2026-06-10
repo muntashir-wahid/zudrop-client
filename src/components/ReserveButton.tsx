@@ -1,17 +1,21 @@
+interface IReserveButtonProps {
+  onClick: () => void;
+  disabled?: boolean;
+  isLoading?: boolean;
+}
+
 export default function ReserveButton({
   onClick,
   disabled,
-}: {
-  onClick: () => void;
-  disabled?: boolean;
-}) {
+  isLoading,
+}: IReserveButtonProps) {
   return (
     <button
       onClick={onClick}
-      disabled={disabled}
-      className="mt-4 w-full bg-black text-white py-2 rounded-lg disabled:opacity-50"
+      disabled={disabled || isLoading}
+      className={`mt-4 w-full bg-black text-white py-2 rounded-lg disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed`}
     >
-      Reserve
+      {isLoading ? "Reserving..." : "Reserve"}
     </button>
   );
 }

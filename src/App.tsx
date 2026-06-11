@@ -61,7 +61,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f4f1ea] text-slate-800">
+    <div className="min-h-screen bg-[#f4f1ea] text-slate-800 px-3 md:px-0">
       <main>
         <Dashboard />
       </main>

@@ -10,7 +10,9 @@ export default function CountdownTimer({
 }) {
   const [timeLeft, setTimeLeft] = useState(() => {
     const diff = new Date(expiresAt).getTime() - Date.now();
-    return Math.max(0, Math.floor(diff / 1000));
+    const initialTimeLeft = Math.max(0, Math.floor(diff / 1000));
+
+    return initialTimeLeft > 60 ? 60 : initialTimeLeft;
   });
 
   useEffect(() => {

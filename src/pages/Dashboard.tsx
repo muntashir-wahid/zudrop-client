@@ -1,5 +1,6 @@
 import { Wifi, WifiOff, RefreshCw } from "lucide-react";
 import DropCard from "../components/DropCard";
+import PromoBanner from "../components/PromoBanner";
 import useDrops from "../hooks/useDrops";
 
 const Dashboard = () => {
@@ -13,16 +14,18 @@ const Dashboard = () => {
 
   if (isLoading) {
     return (
-      <div className="mx-auto w-[min(1200px,calc(100%-1.5rem))] py-6 sm:py-8">
-        <div className="rounded-[20px] border border-[#e5dfd6] bg-white px-5 py-8 text-center text-sm text-slate-500 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">
-          Loading drops…
+      <div className="mx-auto container py-6 sm:py-8">
+        <div className="rounded-[20px] min-h-[80vh] flex items-center justify-center px-5 py-8 text-center text-sm text-slate-500 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">
+          Loading Drops... <span className="animate-spin">⏳</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto w-[min(1200px,calc(100%-1.5rem))] py-6 sm:py-8">
+    <div className="mx-auto container py-6 sm:py-8">
+      <PromoBanner />
+
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-[20px] border border-[#e5dfd6] bg-white px-5 py-5 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">
         <div>
           <p className="mb-1 text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">
